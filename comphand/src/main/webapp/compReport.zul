@@ -1,6 +1,6 @@
-<?page title="Complain Handling Add" contentType="text/html;charset=UTF-8"?>
+<?page title="Complain Handling Report" contentType="text/html;charset=UTF-8"?>
 <zk>
-    <window id="inputComp" title="Complain Input" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.comphand.viewmodel.CompHandVM')" 
+    <window id="inputComp" title="Complain Report" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.comphand.viewmodel.CompHandVM')" 
             validationMessages="@id('vmsgs')" border="normal" width="100%" height="100%" contentStyle="overflow-y:auto;" onCreate="@command('showFormReport')" >
         
         <div sclass="divContainer">
