@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.comphand.model">
+    <class name="Compdata" table="complaint">
+        <id name="request_id" column="request_id">
+            <generator class="identity" />
+        </id>
+        <property name="create_at" column="create_at" type="date" />
+        <property name="user_input" column="user_input" length="20" type="string" />
+        <property name="user_otor" column="user_otor" length="20" type="string" />
+        <property name="received_date" column="received_date" type="date" />
+        <property name="incident_date" column="incident_date" type="date" />
+        <property name="completion_date" column="completion_date" type="date" />
+        <property name="customer_name" column="customer_name" length="100" type="string" />
+        <property name="comp_type" column="comp_type" length="3" type="string" />
+        <property name="req_type" column="req_type" length="3" type="string" />
+        <property name="amount" column="amount" type="int" />
+        <property name="address" column="address" length="250" type="string" />
+        <many-to-one name="branch_code" class="Branch" column="branch_code" lazy="false" />
+        <many-to-one name="channel_code" class="Channel" column="channel_code" lazy="false" />
+        <property name="location" column="location" length="50" type="string" />
+        <property name="settlement_number" column="settlement_number" length="50" type="string" />
+        <many-to-one name="city_code" class="City" column="city_code" lazy="false" />
+        <property name="extension_number" column="extension_number" length="50" type="string" />
+        <property name="dispute_filepath" column="dispute_filepath" length="500" type="string" />
+        <property name="settlement_filepath" column="settlement_filepath" length="500" type="string" />
+        <property name="extension_filepath" column="extension_filepath" length="500" type="string" />
+        <property name="update_at" column="update_at" type="date" />
+        <property name="is_deleted" column="is_deleted" length="1" type="string" />
+        <many-to-one name="code_601" class="Code_601" column="code_601" lazy="false" />
+        <many-to-one name="code_601_problem" class="Code_601_Info" column="code_601_problem" lazy="false" />
+        <many-to-one name="code_602" class="Code_602" column="code_602" lazy="false" />
+        <many-to-one name="code_602_problem" class="Code_602_Info" column="code_602_problem" lazy="false" />
+        <many-to-one name="code_603" class="Code_603" column="code_603" lazy="false" />
+        <many-to-one name="code_603_problem" class="Code_603_Info" column="code_603_problem" lazy="false" />
+        <many-to-one name="code_604" class="Code_604" column="code_604" lazy="false" />
+        <many-to-one name="code_604_problem" class="Code_604_Info" column="code_604_problem" lazy="false" />
+        <many-to-one name="code_605" class="Code_605" column="code_605" lazy="false" />
+        <many-to-one name="code_605_problem" class="Code_605_Info" column="code_605_problem" lazy="false" />
+        <property name="atm_card_number" column="atm_card_number" length="16" type="string" />
+        <property name="description" column="description" length="255" type="string" />
+        <property name="incident_checkbox" column="incident_checkbox" length="1" type="string" />
+        <property name="status" column="status" length="20" type="string" />
+        <property name="aging" column="aging" type="int" />
+        <property name="action" column="action" length="15" type="string" />
+    </class>
+</hibernate-mapping>

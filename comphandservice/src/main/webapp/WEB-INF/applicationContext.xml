@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- db.* properties come from application.properties -->
+    <context:property-placeholder location="classpath:application.properties" />
+
+    <!-- Connection pool -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="org.postgresql.Driver" />
+        <property name="jdbcUrl" value="${db.url}" />
+        <property name="user" value="${db.username}" />
+        <property name="password" value="${db.password}" />
+        <property name="minPoolSize" value="5" />
+        <property name="maxPoolSize" value="20" />
+    </bean>
+
+    <!-- Hibernate SessionFactory, mapped via the .hbm.xml files next to each Model class -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingResources">
+            <list>
+                <value>com/comphand/model/User.hbm.xml</value>
+                <value>com/comphand/model/Product.hbm.xml</value>
+                <value>com/comphand/model/Branch.hbm.xml</value>
+                <value>com/comphand/model/Channel.hbm.xml</value>
+                <value>com/comphand/model/City.hbm.xml</value>
+                <value>com/comphand/model/Code_601.hbm.xml</value>
+                <value>com/comphand/model/Code_602.hbm.xml</value>
+                <value>com/comphand/model/Code_603.hbm.xml</value>
+                <value>com/comphand/model/Code_604.hbm.xml</value>
+                <value>com/comphand/model/Code_605.hbm.xml</value>
+                <value>com/comphand/model/Code_601_Info.hbm.xml</value>
+                <value>com/comphand/model/Code_602_Info.hbm.xml</value>
+                <value>com/comphand/model/Code_603_Info.hbm.xml</value>
+                <value>com/comphand/model/Code_604_Info.hbm.xml</value>
+                <value>com/comphand/model/Code_605_Info.hbm.xml</value>
+                <value>com/comphand/model/CompOtor.hbm.xml</value>
+                <value>com/comphand/model/Compdata.hbm.xml</value>
+                <value>com/comphand/model/MasterOtor.hbm.xml</value>
+                <value>com/comphand/model/System_logs.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <!-- "update" is convenient for development; use "validate" (and real
+                     migration scripts / Flyway / Liquibase) in production -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Enables @Transactional on the Bo layer below -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- Dao layer -->
+    <bean id="userDao" class="com.comphand.dao.impl.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="productDao" class="com.comphand.dao.impl.ProductDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="masterDao" class="com.comphand.dao.impl.MasterDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="comphandDao" class="com.comphand.dao.impl.ComphandDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- Bo layer -->
+    <bean id="userBo" class="com.comphand.bo.impl.UserBoImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
+    <bean id="productBo" class="com.comphand.bo.impl.ProductBoImpl">
+        <property name="productDao" ref="productDao" />
+    </bean>
+    <bean id="masterBo" class="com.comphand.bo.impl.MasterBoImpl">
+        <property name="masterDao" ref="masterDao" />
+    </bean>
+    <bean id="comphandBo" class="com.comphand.bo.impl.ComphandBoImpl">
+        <property name="comphandDao" ref="comphandDao" />
+    </bean>
+
+    <!-- Exposes each Bo bean over HTTP (Spring HttpInvoker). A bean id
+         starting with "/" is auto-mapped by URL to the DispatcherServlet's
+         default BeanNameUrlHandlerMapping; combined with web.xml's
+         "/remoting/*" servlet mapping, "/userBo" becomes reachable at
+         .../comphandservice/remoting/userBo -->
+    <bean id="/userBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="userBo" />
+        <property name="serviceInterface" value="com.comphand.bo.UserBo" />
+    </bean>
+    <bean id="/productBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="productBo" />
+        <property name="serviceInterface" value="com.comphand.bo.ProductBo" />
+    </bean>
+    <bean id="/masterBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="masterBo" />
+        <property name="serviceInterface" value="com.comphand.bo.MasterBo" />
+    </bean>
+    <bean id="/comphandBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="comphandBo" />
+        <property name="serviceInterface" value="com.comphand.bo.ComphandBo" />
+    </bean>
+
+</beans>

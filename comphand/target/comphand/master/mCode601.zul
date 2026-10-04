@@ -1,0 +1,10 @@
+<?page title="Product management" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <window id="mChannel" title="Master Channel" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.comphand.viewmodel.CompMasterVM')" 
+            validationMessages="@id('vmsgs')" border="normal" width="100%" height="100%" onCreate="@command('formMstCode601')" >
+        
+        <include src="../compMaster.zul"/>
+        <separator bar="true"/>
+        <include src="../compDetailMaster.zul"/>
+    </window>
+</zk>

@@ -1,0 +1,159 @@
+<?page title="Product management" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <vlayout>
+        <!--<vlayout spacing="15px" style="padding: 20px;">-->
+
+        <!-- Search Filters -->
+        <hlayout style="align-content: center; align-items: center; align-self: center;" spacing="10px">
+            <vlayout>
+                <label value="Start Date"/>
+                <datebox sclass="inputform" value="@bind(vm.startDate)" format="dd/MM/yyyy" readonly="true"/>
+            </vlayout>
+            <vlayout>
+                <label value="End Date"/>
+                <datebox sclass="inputform" value="@bind(vm.endDate)" format="dd/MM/yyyy" readonly="true"/>
+            </vlayout>
+            <vlayout>
+                <label value="Search" visible="@load(!vm.strTitleMenu.contains('Report'))"/>
+                <!--<label value="Search" visible="@load(!vm.isReport)"/>-->
+                <textbox sclass="inputform" maxlength="50" value="@bind(vm.strSearch)" onOK="@command('searchComplaints', condition=vm.strTitleMenu)" visible="@load(!vm.strTitleMenu.contains('Report'))"/>
+                <!--<textbox sclass="inputform" maxlength="50" value="@bind(vm.strSearch)" onOK="@command('searchComplaints', condition=vm.isReport)" visible="@load(!vm.isReport)"/>-->
+            </vlayout>
+            <vlayout vflex="min">
+                <button label="Search" onClick="@command('searchComplaints', condition=vm.strTitleMenu)" style="background-color: #004d40; color: white; margin-top: 20px;"/>
+                <!--<button label="Search" onClick="@command('searchComplaints', condition=vm.isReport)" style="background-color: #004d40; color: white; margin-top: 20px;"/>-->
+            </vlayout>
+            <vlayout vflex="min">
+                <button label="Reset" onClick="@command('resetComplaints', condition=vm.strTitleMenu)" style="background-color: #004d40; color: white; margin-top: 20px;"/>
+                <!--<button label="Reset" onClick="@command('resetComplaints', condition=vm.isReport)" style="background-color: #004d40; color: white; margin-top: 20px;"/>-->
+            </vlayout>
+
+        </hlayout>
+
+        <label value="@load(vm.strTitleMenu)" style="font-size: 18px; margin-top: 15px; font-weight: bold;"/>
+        <!-- Complaints Table -->
+        <listbox model="@bind(vm.complaints)" emptyMessage="No complaints found." mold="paging" pageSize="10" sizedByContent="true" visible="@load((!vm.strTitleMenu.contains('Report')) &amp;&amp; (!vm.strTitleMenu.contains('Authorize')) &amp;&amp; (!vm.strTitleMenu.contains('Complain Handling Logs')))">
+        <!--<listbox model="@bind(vm.complaints)" emptyMessage="No complaints found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(!vm.isReport)">-->
+            <listhead>
+                <listheader label="Request ID"/>
+                <listheader label="Customer Name" />
+                <listheader label="Channel" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"/>
+                <listheader label="City" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"/>
+                <listheader label="Branch" />
+                <listheader label="Received Date" />
+                <listheader label="Incident Date" />
+                <listheader label="Completion Date" />
+                <listheader label="Request By" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"/>
+                <listheader label="Action" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"/>
+                <listheader label="Aging" visible="@load(vm.strTitleMenu.equals('Outstanding Complaints'))"/>
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.request_id)"></listcell>
+                    <listcell label="@load(item.customer_name)"></listcell>
+                    <listcell label="@load(item.channel_code.channel_name)" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"></listcell>
+                    <listcell label="@load(item.city_code.city_name)" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"></listcell>
+                    <listcell label="@load(item.branch_code.branch_name)"></listcell>
+                    <listcell label="@load(item.received_date) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(item.incident_date) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(item.completion_date) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(item.user_input)" visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))"/> 
+                    <listcell visible="@load(!vm.strTitleMenu.equals('Outstanding Complaints'))">
+                        <button label="View" onClick="@command('viewComplaint', id=item.request_id)" visible="@load(vm.showBtnView)"/>
+                        <button label="Edit" onClick="@command('editComplaint', id=item.request_id)" visible="@load(vm.showBtnEdel)"/>
+                        <button label="Delete" onClick="@command('deleteComplaint', id=item.request_id)" visible="@load(vm.showBtnEdel)"/>
+                    </listcell>
+                    <listcell label="@load(item.aging)" visible="@load(vm.strTitleMenu.equals('Outstanding Complaints'))"/>
+                </listitem>
+            </template>
+        </listbox>
+        
+        <listbox model="@bind(vm.reports)" emptyMessage="No reports found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(vm.strTitleMenu.equals('Complaint Handling Report'))">
+        <!--<listbox model="@bind(vm.reports)" emptyMessage="No complaints found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(vm.isReport)">-->
+            <listhead>
+                <listheader label="Product Type"/>
+                <listheader label="Problem Type" />
+                <listheader label="Number of Complaints"/>
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.PRODUCT_TYPE)"></listcell>
+                    <listcell label="@load(item.PROBLEM_TYPE)"></listcell>
+                    <listcell label="@load(item.FREK)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+        
+        <listbox model="@bind(vm.reports)" emptyMessage="No reports found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(vm.strTitleMenu.equals('Complaint Resolution Report'))">
+            <listhead>
+                <listheader label="Branch"/>
+                <listheader label="Resolution Status" />
+                <listheader label="Total Complaints"/>
+                <listheader label="Average Resolution Time (days)"/>
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.BRANCH_CODE)"></listcell>
+                    <listcell label="@load(item.KET)"></listcell>
+                    <listcell label="@load(item.FREK)"></listcell>
+                    <listcell label="@load(item.RATA)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+        
+        <listbox model="@bind(vm.lstOtor)" emptyMessage="No data found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(vm.strTitleMenu.equals('Authorize Complaints'))">
+            <listhead>
+                <listheader label="Request ID"/>
+                <listheader label="Customer Name" />
+                <listheader label="Branch" />
+                <listheader label="Received Date" />
+                <listheader label="Incident Date" />
+                <listheader label="Completion Date" />
+                <listheader label="Action" />
+                <listheader label="Aging"/>
+                <listheader label="Auth"/>
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.request_id)"></listcell>
+                    <listcell label="@load(item.customer_name)"></listcell>
+                    <listcell label="@load(item.branch_code.branch_name)"></listcell>
+                    <listcell label="@load(item.received_date) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(item.incident_date) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(item.completion_date) @converter('formatedDate', format='dd-MM-yyyy')"/>
+                    <listcell label="@load(item.action)"></listcell>
+                    <listcell label="@load(item.aging)"/>
+                    <listcell>
+                        <button label="Approve" onClick="@command('otorApproved', id=item.request_id)"/>
+                        <button label="Reject" onClick="@command('otorRejected', id=item.request_id)"/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+        <listbox model="@bind(vm.lstLogs)" emptyMessage="No data found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(vm.strTitleMenu.equals('Complain Handling Logs'))">
+            <listhead>
+                <listheader label="Activity Type"/>
+                <listheader label="Complain Req ID" />
+                <listheader label="Action Date" />
+                <listheader label="Description" />
+                <listheader label="User Input" />
+                <listheader label="User Otor" />
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.activity_type)"></listcell>
+                    <listcell label="@load(item.request_id)"></listcell>
+                    <listcell label="@load(item.tgl_input) @converter('formatedDate', format='dd-MM-yyyy')"></listcell>
+                    <listcell>
+                        <label value="@load(vm.formattedDescription(item.description))"
+                               style="white-space: pre-line;"/>
+                    </listcell>
+                    <listcell label="@load(item.user_input)"></listcell>
+                    <listcell label="@load(item.user_otor)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+        <button label="Export as Excel" onClick="@command('expReport', param=vm.strTitleMenu)" style="background-color: #004d40; color: white;" visible="@load(vm.strTitleMenu.contains('Report')||vm.strTitleMenu.contains('Handling Logs'))"/>
+        <!--<button label="Export as Excel" onClick="@command('expReport')" style="background-color: #004d40; color: white;" visible="@load(vm.isReport)"/>-->
+    </vlayout>
+</zk>

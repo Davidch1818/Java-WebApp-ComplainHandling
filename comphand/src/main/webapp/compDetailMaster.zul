@@ -1,0 +1,35 @@
+<?page title="Product management" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <vlayout width="100%" style="padding: 10px; gap: 10px;" visible="@load(vm.showDetMst)">
+            <!--@load(vm.isBtnEditMode ? 'Update Complaint' : 'Submit Complaint')-->
+        <!-- Row 1: Request ID, Settlement Number, Extension Number -->
+        <!--<hlayout spacing="100px">-->
+        <vlayout>
+            <label sclass="labelform" value="@load(vm.lblField1)"/>
+            <textbox sclass="inputform" value="@bind(vm.masterotor.CODE1,param=vm.strTitleMenu)" readonly="@load(vm.masterotor.TYPE_PRS ne 'Add')" maxlength="3"
+
+            onBlur="@command('trimLeadingWhitespace', field='FIELD1', text=self.value)"
+            />
+        </vlayout>
+        <vlayout>
+            <label sclass="labelform" value="@load(vm.lblField2)"/>
+            <textbox sclass="inputform" value="@bind(vm.masterotor.NAME,param=vm.strTitleMenu)" readonly="@load(vm.masterotor.TYPE_PRS eq 'Delete')" maxlength="200"
+
+            onBlur="@command('trimLeadingWhitespace', field='FIELD2', text=self.value)"
+            />
+        </vlayout>
+        <vlayout visible="@load(vm.inputCityCode)">
+            <label sclass="labelform" value="@load(vm.lblField3)"/>
+            <combobox sclass="inputform" model="@load(vm.cities)" selectedItem="@bind(vm.city)" readonly="true" disabled="@load(vm.masterotor.TYPE_PRS ne 'Add')">
+                <template name="model">
+                    <comboitem label="@load(each.city_name)" value="@load(each)"/>
+                </template>
+            </combobox>
+        </vlayout>
+        <!--</hlayout>-->
+        <separator bar="true"/>
+        <!-- Submit Button -->
+        <button sclass="btnOKMst" label="Submit" onClick="@command('insMst',param=vm.strTitleMenu)" visible="@load(vm.masterotor.TYPE_PRS ne 'Delete')"/>
+
+    </vlayout>
+</zk>

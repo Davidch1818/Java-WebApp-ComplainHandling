@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.comphand.model">
+    <class name="Code_603_Info" table="code_603_problem">
+        <id name="code_603p_code" column="code_603p_code">
+            <generator class="identity" />
+        </id>
+        <property name="code_603p_name" column="code_603p_name" length="50" type="string" />
+        <property name="is_deleted" column="is_deleted" length="1" type="string" />
+        <property name="created_at" column="created_at" type="date" />
+        <property name="update_at" column="update_at" type="date" />
+        <property name="user_input" column="user_input" length="20" type="string" />
+        <property name="user_otor" column="user_otor" length="20" type="string" />
+    </class>
+</hibernate-mapping>

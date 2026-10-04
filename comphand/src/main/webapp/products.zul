@@ -1,0 +1,47 @@
+<?page title="Product management" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <window title="Product management" border="normal" width="640px"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.comphand.viewmodel.ProductViewModel')">
+
+        <vlayout>
+
+            <hlayout spacing="8px">
+                <a href="index.zul">Users</a>
+                <label value=" | " />
+                <a href="products.zul">Products</a>
+            </hlayout>
+
+            <hlayout valign="middle" spacing="8px">
+                <textbox value="@bind(vm.newProduct.name)" placeholder="Name" />
+                <decimalbox value="@bind(vm.newProduct.price)" placeholder="Price" />
+                <intbox value="@bind(vm.newProduct.stock)" placeholder="Stock" />
+                <button label="Add product" onClick="@command('createProduct')" />
+            </hlayout>
+
+            <listbox model="@bind(vm.products)" height="300px" mold="paging" pageSize="10">
+                <listhead>
+                    <listheader label="ID" width="60px" />
+                    <listheader label="Name" />
+                    <listheader label="Price" width="100px" />
+                    <listheader label="Stock" width="80px" />
+                    <listheader label="" width="90px" />
+                </listhead>
+                <template name="model" var="p">
+                    <listitem>
+                        <listcell label="@bind(p.id)" />
+                        <listcell label="@bind(p.name)" />
+                        <listcell label="@bind(p.price)" />
+                        <listcell label="@bind(p.stock)" />
+                        <listcell>
+                            <button label="Delete" onClick="@command('deleteProduct', product=p)" />
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+
+            <label value="@bind(vm.statusMessage)" style="color:#666" />
+
+        </vlayout>
+    </window>
+</zk>

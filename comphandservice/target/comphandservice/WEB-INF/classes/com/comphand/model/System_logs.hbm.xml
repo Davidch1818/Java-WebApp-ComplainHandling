@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.comphand.model">
+    <class name="System_Logs" table="system_logs">
+        <id name="log_id" column="log_id">
+            <generator class="identity" />
+        </id>
+        <property name="user_input" column="user_input" length="20" type="string" />
+        <property name="activity_type" column="activity_type" length="20" type="string" />
+        <property name="request_id" column="request_id" length="20" type="string" />
+        <property name="tgl_input" column="tgl_input" type="date" />
+        <property name="description" column="description" length="500" type="string" />
+        <property name="changed_fields" column="changed_fields" length="50" type="string" />
+        <property name="desc_file" column="desc_file" length="150" type="string" />
+        <property name="user_otor" column="user_otor" length="20" type="string" />
+    </class>
+</hibernate-mapping>

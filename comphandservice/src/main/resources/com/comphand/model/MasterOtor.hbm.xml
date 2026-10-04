@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.comphand.model">
+    <class name="MasterOtor" table="master_otor">
+        <id name="CODE1" column="code1">
+            <generator class="identity" />
+        </id>
+        <property name="NAME" column="name" length="100" type="string" />
+        <property name="CODE2" column="code2" length="50" type="string" />
+        <property name="USER_INPUT" column="user_input" length="50" type="string" />
+        <property name="USER_OTOR" column="user_otor" length="50" type="string" />
+        <property name="ACTION" column="action" length="20" type="string" />
+        <property name="TYPE_PRS" column="type_prs" length="20" type="string" />
+    </class>
+</hibernate-mapping>

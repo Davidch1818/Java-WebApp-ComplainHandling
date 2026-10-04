@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>comphandservice</display-name>
+
+    <!-- DispatcherServlet doubles as our Spring container bootstrap:
+         its own WebApplicationContext is built from
+         /WEB-INF/applicationContext.xml (set explicitly below, though
+         that path is also Spring's default when unset). All beans:
+         DataSource, SessionFactory, Dao, Bo, and the HttpInvoker
+         exporters, live in that one file. -->
+    <servlet>
+        <servlet-name>comphandservice</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/applicationContext.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>comphandservice</servlet-name>
+        <url-pattern>/remoting/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>

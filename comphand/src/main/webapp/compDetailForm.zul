@@ -1,0 +1,286 @@
+<?page title="Product management" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <vlayout width="100%" style="padding: 10px; gap: 10px;" visible="@load(vm.showDetComp)">
+            
+        <!-- Row 1: Request ID, Settlement Number, Extension Number -->
+        <hlayout spacing="100px">
+            <vlayout>
+                <label sclass="labelform" value="Request ID*"/>
+                <textbox sclass="inputform" value="@bind(vm.requestid)" readonly="@load(vm.activeReqID)" maxlength="10" onChange="@command('reqIDchange')"
+                onBlur="@command('trimLeadingWhitespace', field='REQ', text=self.value)"
+                />
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Settlement Number"/>
+                <textbox sclass="inputform" maxlength="25" readonly="@load(vm.activeSettNumber)" value="@bind(vm.settnumber)"
+                onBlur="@command('trimLeadingWhitespace', field='SETT', text=self.value)"
+                />
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Extension Number"/>
+                <!--<textbox sclass="inputform" maxlength="25" readonly="@load(vm.activeextNumber)" value="@load(vm.compotor.EXTENSION_NUMBER) @save(vm.compotor.EXTENSION_NUMBER, before={'prsupl'})"-->
+                <textbox sclass="inputform" maxlength="25" readonly="@load(vm.activeextNumber)" value="@bind(vm.exttnumber)"
+                onBlur="@command('trimLeadingWhitespace', field='EXT', text=self.value)"
+                />
+                
+            </vlayout>
+        </hlayout>
+
+        <!-- Row 2: Customer Name, Location -->
+        <hlayout spacing="100px">
+            <vlayout>
+                <label sclass="labelform" value="Customer Name"/>  <!-- Mandatory --> 
+                <textbox sclass="inputform" maxlength="50" readonly="@load(vm.activeCustName)" value="@bind(vm.custname)"
+                onBlur="@command('trimLeadingWhitespace', field='CUST', text=self.value)"
+                />
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Location"/>
+                <textbox sclass="inputform" maxlength="25" readonly="@load(vm.activeLoc)" value="@bind(vm.location)"
+                onBlur="@command('trimLeadingWhitespace', field='LOC', text=self.value)"
+                />
+            </vlayout>
+        </hlayout>
+
+        <!-- Row 3: Channel, City, Branch -->
+        <hlayout spacing="100px">
+            <vlayout>
+                <label sclass="labelform" value="Channel" style="font-weight: bold;"/>  <!-- Mandatory --> 
+                <combobox sclass="inputform" model="@load(vm.channels)" selectedItem="@bind(vm.channel)" value="@load(vm.channel.channel_name)" readonly="true" disabled="@load(vm.activeCbChannel)">
+                <!--<combobox sclass="inputform" model="@load(vm.channels)" selectedItem="@bind(vm.channel)" value="@bind(vm.channel.channel_name)" readonly="true" disabled="@load(vm.activeCbChannel)">-->
+                    <template name="model">
+                        <comboitem label="@load(each.channel_name)"/>
+                    </template>
+                </combobox>
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="City" style="font-weight: bold;"/>  <!-- Mandatory --> 
+                <combobox sclass="inputform" model="@load(vm.cities)" selectedItem="@bind(vm.city)" readonly="true" disabled="@load(vm.activeCbCity)" onSelect="@command('sdhSelectCity')">
+                <!--<combobox sclass="inputform" model="@load(vm.cities)" selectedItem="@bind(vm.city)" value="@bind(vm.city.city_name)" readonly="true" disabled="@load(vm.activeCbCity)" onChange="@command('sdhSelectCity')">-->
+                    <template name="model">
+                        <comboitem label="@load(each.city_name)"/>
+                        <!--<comboitem label="@load(each.city_name)" value="@load(each)"/>-->
+                    </template>
+                </combobox>
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Branch" style="font-weight: bold;"/>  <!-- Mandatory --> 
+                <combobox sclass="inputform" model="@load(vm.branches)" selectedItem="@bind(vm.branch)" value="@load(vm.branch.branch_name)" readonly="true" disabled="@load(vm.activeCbBranch)">
+                <!--<combobox sclass="inputform" model="@load(vm.branches)" selectedItem="@bind(vm.branch)" value="@bind(vm.branch.branch_name)" readonly="true" disabled="@load(vm.activeCbBranch)">-->
+                    <template name="model">
+                        <comboitem label="@load(each.branch_name)" value="@load(each)"/>
+                    </template>
+                </combobox>
+            </vlayout>
+        </hlayout>
+
+        <!-- Row 4: Amount, ATM Card Number -->
+        <hlayout spacing="100px">
+            <vlayout>
+                <label sclass="labelform" value="Amount"/>
+                <doublebox sclass="inputform" maxlength="15" readonly="@load(vm.activeAmount)" value="@bind(vm.amount)"/>
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="ATM Card Number"/>
+                <textbox sclass="inputform" maxlength="50" readonly="@load(vm.activeATM)" value="@bind(vm.atmnumber)"
+                onBlur="@command('trimLeadingWhitespace', field='ATM', text=self.value)"
+                />
+            </vlayout>
+        </hlayout>
+
+        <!-- Description -->
+        <vlayout>
+            <label sclass="labelform" value="Description"/>
+            <textbox id="txtDesc" sclass="inputform" maxlength="50" value="@bind(vm.description)" 
+                     readonly="@load(vm.activeDesc)" multiline="true" height="100px" width="40%"
+                     onBlur="@command('trimLeadingWhitespace', field='DESCRIPTION', text=self.value)"/>
+            
+        </vlayout>
+
+        <!-- Row 5: Dates -->
+        <hlayout spacing="100px">
+            <vlayout>
+                <label sclass="labelform" value="Received Date" style="font-weight: bold;"/>  <!-- Mandatory --> 
+                <datebox sclass="inputform" value="@bind(vm.receiveddate)" constraint="no future" format="dd/MM/yyyy" readonly="true" disabled="@load(vm.activeRecDate)"/>
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Date of Incident" style="font-weight: bold;"/>  <!-- Mandatory --> 
+                <datebox sclass="inputform" value="@bind(vm.incdate)" constraint="no future" format="dd/MM/yyyy" readonly="true" disabled="@load(vm.activeIncDate)"/>
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Completion Date" visible="@load(vm.isBtnEditMode)"/>
+                <datebox sclass="inputform" value="@bind(vm.completiondate)" format="dd/MM/yyyy" readonly="true" disabled="@load(vm.activeCompDate)"
+                visible="@load(vm.isBtnEditMode)"/>
+            </vlayout>
+        </hlayout>
+
+        <!-- Codes 601-605 Sections -->
+        <tabbox>
+            <tabs>
+                <tab label="601 - Type of Product and Problem"/>
+                <tab label="602 - Reporting Period"/>
+                <tab label="603 - Causes"/>
+                <tab label="604 - Negative Publication"/>
+                <tab label="605 - Dispute Resolution"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel>  601 
+                    <hlayout spacing="10px">
+                        <vlayout>
+                            <label value="Product"/>
+                            <combobox model="@load(vm.code601Products)" selectedItem="@bind(vm.code601product)" value="@load(vm.code601product.code_601_name)" readonly="true" disabled="@load(vm.activeCb601)">
+                            <!--<combobox model="@load(vm.code601Products)" selectedItem="@bind(vm.code601product)" value="@bind(vm.code601product.code_601_name)" readonly="true" disabled="@load(vm.activeCb601)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_601_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Problem"/>
+                            <combobox model="@load(vm.code601Problems)" selectedItem="@bind(vm.code601problem)" value="@load(vm.code601problem.code_601p_name)" readonly="true" disabled="@load(vm.activeCb601A)">
+                            <!--<combobox model="@load(vm.code601Problems)" selectedItem="@bind(vm.code601problem)" value="@bind(vm.code601problem.code_601p_name)" readonly="true" disabled="@load(vm.activeCb601A)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_601p_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Reset"/>
+                            <toolbarbutton label="Clear" onClick="@command('clear60', option='601')" disabled="@load(vm.activeCb601)"></toolbarbutton>
+                        </vlayout>
+                    </hlayout>
+                </tabpanel>
+                <tabpanel>  602 
+                    <hlayout spacing="10px">
+                        <vlayout>
+                            <label value="Product"/>
+                            <combobox model="@load(vm.code602Products)" selectedItem="@bind(vm.code602product)" value="@load(vm.code602product.code_602_name)" readonly="true" disabled="@load(vm.activeCb602)">
+                            <!--<combobox model="@load(vm.code602Products)" selectedItem="@bind(vm.code602product)" value="@bind(vm.code602product.code_602_name)" readonly="true" disabled="@load(vm.activeCb602)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_602_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Problem"/>
+                            <combobox model="@load(vm.code602Problems)" selectedItem="@bind(vm.code602problem)" value="@load(vm.code602problem.code_602p_name)" readonly="true" disabled="@load(vm.activeCb602A)">
+                            <!--<combobox model="@load(vm.code602Problems)" selectedItem="@bind(vm.code602problem)" value="@bind(vm.code602problem.code_602p_name)" readonly="true" disabled="@load(vm.activeCb602A)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_602p_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Reset"/>
+                            <toolbarbutton label="Clear" onClick="@command('clear60', option='602')" disabled="@load(vm.activeCb602)"></toolbarbutton>
+                        </vlayout>
+                    </hlayout>
+                </tabpanel>
+                <tabpanel>  603 
+                    <hlayout spacing="10px">
+                        <vlayout>
+                            <label value="Product"/>
+                            <combobox model="@load(vm.code603Products)" selectedItem="@bind(vm.code603product)" value="@load(vm.code603product.code_603_name)" readonly="true" disabled="@load(vm.activeCb603)">
+                            <!--<combobox model="@load(vm.code603Products)" selectedItem="@bind(vm.code603product)" value="@bind(vm.code603product.code_603_name)" readonly="true" disabled="@load(vm.activeCb603)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_603_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Problem"/>
+                            <combobox model="@load(vm.code603Problems)" selectedItem="@bind(vm.code603problem)" value="@load(vm.code603problem.code_603p_name)" readonly="true" disabled="@load(vm.activeCb603A)">
+                            <!--<combobox model="@load(vm.code603Problems)" selectedItem="@bind(vm.code603problem)" value="@bind(vm.code603problem.code_603p_name)" readonly="true" disabled="@load(vm.activeCb603A)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_603p_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Reset"/>
+                            <toolbarbutton label="Clear" onClick="@command('clear60', option='603')" disabled="@load(vm.activeCb603)"></toolbarbutton>
+                        </vlayout>
+                    </hlayout>
+                </tabpanel>
+                <tabpanel>  604 
+                    <hlayout spacing="10px">
+                        <vlayout>
+                            <label value="Product"/>
+                            <combobox model="@load(vm.code604Products)" selectedItem="@bind(vm.code604product)" value="@load(vm.code604product.code_604_name)" readonly="true" disabled="@load(vm.activeCb604)">
+                            <!--<combobox model="@load(vm.code604Products)" selectedItem="@bind(vm.code604product)" value="@bind(vm.code604product.code_604_name)" readonly="true" disabled="@load(vm.activeCb604)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_604_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Problem"/>
+                            <combobox model="@load(vm.code604Problems)" selectedItem="@bind(vm.code604problem)" value="@load(vm.code604problem.code_604p_name)" readonly="true" disabled="@load(vm.activeCb604A)">
+                            <!--<combobox model="@load(vm.code604Problems)" selectedItem="@bind(vm.code604problem)" value="@bind(vm.code604problem.code_604p_name)" readonly="true" disabled="@load(vm.activeCb604A)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_604p_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Reset"/>
+                            <toolbarbutton label="Clear" onClick="@command('clear60', option='604')" disabled="@load(vm.activeCb604)"></toolbarbutton>
+                        </vlayout>
+                    </hlayout>
+                </tabpanel>
+                <tabpanel>  605 
+                    <hlayout spacing="10px">
+                        <vlayout>
+                            <label value="Product"/>
+                            <combobox model="@load(vm.code605Products)" selectedItem="@bind(vm.code605product)" value="@load(vm.code605product.code_605_name)" readonly="true" disabled="@load(vm.activeCb605)">
+                            <!--<combobox model="@load(vm.code605Products)" selectedItem="@bind(vm.code605product)" value="@bind(vm.code605product.code_605_name)" readonly="true" disabled="@load(vm.activeCb605)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_605_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Problem"/>
+                            <combobox model="@load(vm.code605Problems)" selectedItem="@bind(vm.code605problem)" value="@load(vm.code605problem.code_605p_name)" readonly="true" disabled="@load(vm.activeCb605A)">
+                            <!--<combobox model="@load(vm.code605Problems)" selectedItem="@bind(vm.code605problem)" value="@bind(vm.code605problem.code_605p_name)" readonly="true" disabled="@load(vm.activeCb605A)">-->
+                                <template name="model">
+                                    <comboitem label="@load(each.code_605p_name)"/>
+                                </template>
+                            </combobox>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Reset"/>
+                            <toolbarbutton label="Clear" onClick="@command('clear60', option='605')" disabled="@load(vm.activeCb605)"></toolbarbutton>
+                        </vlayout>
+                    </hlayout>
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+
+        <!-- File Uploads -->
+        <hlayout spacing="100px">
+            <vlayout>
+                <label sclass="labelform" value="Pengaduan"/>
+                <toolbarbutton label="Browse" upload="true, native, maxsize=2048" onUpload="@command('browseFile', section='pengaduan')" disabled="@load(vm.bannedAccFile)" />
+                <label value="@load(vm.strFileNamePengaduan)" onClick="@command('openLink', type='Pengaduan')"/>
+                <!--<upload accept="application/pdf" maxsize="10240"/>  10MB--> 
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Penyelesaian"/>
+                <toolbarbutton label="Browse" upload="true, native, maxsize=1024" onUpload="@command('browseFile', section='penyelesaian')" disabled="@load(vm.bannedAccFile)" />
+                <label value="@load(vm.strFileNamePenyelesaian)" onClick="@command('openLink', type='Penyelesaian')"/>
+                <!--<upload accept="application/pdf" maxsize="10240"/>-->
+            </vlayout>
+            <vlayout>
+                <label sclass="labelform" value="Perpanjangan"/>
+                <toolbarbutton label="Browse" upload="true, native, maxsize=1024" onUpload="@command('browseFile', section='perpanjangan')" disabled="@load(vm.bannedAccFile)" />
+                <label value="@load(vm.strFileNamePerpanjangan)" onClick="@command('openLink', type='Perpanjangan')"/>
+                <!--<upload accept="application/pdf" maxsize="10240"/>-->
+            </vlayout>
+        </hlayout>
+
+        <!-- Submit Button -->
+        <button sclass="btnOK" label="@load(vm.isBtnEditMode ? 'Update Complaint' : 'Submit Complaint')" visible="@load(vm.showBtnSubmit)" onClick="@command('prsupl')"/>
+
+    </vlayout>
+</zk>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.comphand.model">
+    <class name="Product" table="product">
+        <id name="id" column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name" column="name" not-null="true" length="150" />
+        <property name="price" column="price" not-null="true" type="big_decimal" />
+        <property name="stock" column="stock" not-null="true" type="integer" />
+    </class>
+</hibernate-mapping>

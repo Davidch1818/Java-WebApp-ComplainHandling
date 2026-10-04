@@ -1,0 +1,76 @@
+<?page title="Product management" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <vlayout>
+        <!--<vlayout spacing="15px" style="padding: 20px;">-->
+
+        <label value="@load(vm.strTitleMenuMaster)" style="font-size: 18px; margin-top: 15px; font-weight: bold;"/>
+        <!-- Complaints Table -->
+        <listbox model="@bind(vm.lstMasters)" emptyMessage="No data found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(!vm.strTitleMenuMaster.contains('Otor'))">
+        <!--<listbox model="@bind(vm.complaints)" emptyMessage="No complaints found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(!vm.isReport)">-->
+            <listhead>
+                <listheader label="Branch Code" visible="@load(vm.strTitleMenu.equals('Branch'))"/>
+                <listheader label="Branch Name" visible="@load(vm.strTitleMenu.equals('Branch'))"/>
+                <listheader label="City Code" visible="@load(vm.strTitleMenu.equals('City'))"/>
+                <listheader label="City Name" visible="@load((vm.strTitleMenu.equals('Branch'))||(vm.strTitleMenu.equals('City')))"/>
+                <listheader label="Channel Code" visible="@load(vm.strTitleMenu.equals('Channel'))"/>
+                <listheader label="Channel Name" visible="@load(vm.strTitleMenu.equals('Channel'))"/>
+                <listheader label="Product Code" visible="@load((vm.strTitleMenu.equals('Code_601'))||(vm.strTitleMenu.equals('Code_602'))||(vm.strTitleMenu.equals('Code_603'))||(vm.strTitleMenu.equals('Code_604'))||(vm.strTitleMenu.equals('Code_605')))"/>
+                <listheader label="Product Name" visible="@load((vm.strTitleMenu.equals('Code_601'))||(vm.strTitleMenu.equals('Code_602'))||(vm.strTitleMenu.equals('Code_603'))||(vm.strTitleMenu.equals('Code_604'))||(vm.strTitleMenu.equals('Code_605')))"/><!--
+-->             <listheader label="Product Info Code" visible="@load((vm.strTitleMenu.equals('Code_601_Info'))||(vm.strTitleMenu.equals('Code_602_Info'))||(vm.strTitleMenu.equals('Code_603_Info'))||(vm.strTitleMenu.equals('Code_604_Info'))||(vm.strTitleMenu.equals('Code_605_Info')))"/>
+                <listheader label="Product Info Name" visible="@load((vm.strTitleMenu.equals('Code_601_Info'))||(vm.strTitleMenu.equals('Code_602_Info'))||(vm.strTitleMenu.equals('Code_603_Info'))||(vm.strTitleMenu.equals('Code_604_Info'))||(vm.strTitleMenu.equals('Code_605_Info')))"/>
+                <listheader label="User Input"/>
+                <listheader label="User Otor"/>
+                <listheader label="Tombol Action"/>
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.BRANCH_CODE)" visible="@load(vm.strTitleMenu.equals('Branch'))"></listcell>
+                    <listcell label="@load(item.BRANCH_NAME)" visible="@load(vm.strTitleMenu.equals('Branch'))"></listcell>
+                    <listcell label="@load(item.CITY_CODE)" visible="@load(vm.strTitleMenu.equals('City'))"></listcell>
+                    <listcell label="@load(item.CITY_NAME)" visible="@load((vm.strTitleMenu.equals('Branch'))||(vm.strTitleMenu.equals('City')))"></listcell>
+                    <listcell label="@load(item.CHANNELS_CODE)" visible="@load(vm.strTitleMenu.equals('Channel'))"></listcell>
+                    <listcell label="@load(item.CHANNEL_NAME)" visible="@load(vm.strTitleMenu.equals('Channel'))"></listcell>
+                    <listcell label="@load(item.PRODUCT_CODE)" visible="@load((vm.strTitleMenu.equals('Code_601'))||(vm.strTitleMenu.equals('Code_602'))||(vm.strTitleMenu.equals('Code_603'))||(vm.strTitleMenu.equals('Code_604'))||(vm.strTitleMenu.equals('Code_605')))"></listcell>
+                    <listcell label="@load(item.PRODUCT_NAME)" visible="@load((vm.strTitleMenu.equals('Code_601'))||(vm.strTitleMenu.equals('Code_602'))||(vm.strTitleMenu.equals('Code_603'))||(vm.strTitleMenu.equals('Code_604'))||(vm.strTitleMenu.equals('Code_605')))"></listcell>
+                    <listcell label="@load(item.PRODUCTINFO_CODE)" visible="@load((vm.strTitleMenu.equals('Code_601_Info'))||(vm.strTitleMenu.equals('Code_602_Info'))||(vm.strTitleMenu.equals('Code_603_Info'))||(vm.strTitleMenu.equals('Code_604_Info'))||(vm.strTitleMenu.equals('Code_605_Info')))"></listcell>
+                    <listcell label="@load(item.PRODUCTINFO_NAME)" visible="@load((vm.strTitleMenu.equals('Code_601_Info'))||(vm.strTitleMenu.equals('Code_602_Info'))||(vm.strTitleMenu.equals('Code_603_Info'))||(vm.strTitleMenu.equals('Code_604_Info'))||(vm.strTitleMenu.equals('Code_605_Info')))"></listcell>
+                    <listcell label="@load(item.USER_INPUT)"></listcell>
+                    <listcell label="@load(item.USER_OTOR)"></listcell>
+                    <listcell>
+                        <button label="Edit" onClick="@command('editMst', id=item)"/>
+                        <button label="Delete" onClick="@command('delMst', id=item)"/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+        <listbox model="@bind(vm.lstMasterOtor)" emptyMessage="No data found." mold="paging" pageSize="10" sizedByContent="true" visible="@load(vm.strTitleMenuMaster.equals('MasterOtor'))">
+            <listhead>
+                <listheader label="Code 1"/>
+                <listheader label="Name"/>
+                <listheader label="Code 2"/>
+                <listheader label="User Input"/>
+                <listheader label="Action"/>
+                <listheader label="Type Process"/>
+                <listheader label="Button"/>
+            </listhead>
+            <template name="model" var="item">
+                <listitem>
+                    <listcell label="@load(item.CODE1)"></listcell>
+                    <listcell label="@load(item.NAME)"></listcell>
+                    <listcell label="@load(item.CODE2)"></listcell>
+                    <listcell label="@load(item.USER_INPUT)"></listcell>
+                    <listcell label="@load(item.ACTION)"></listcell>
+                    <listcell label="@load(item.TYPE_PRS)"></listcell>
+                    <listcell>
+                        <button label="Approve" onClick="@command('otorApproved', id=item.CODE1.concat(item.ACTION))"/>
+                        <button label="Reject" onClick="@command('otorRejected', id=item.CODE1.concat(item.ACTION))"/>
+<!--                        <button label="Approve" onClick="@command('otorApproved', id=item.REQUEST_ID)"/>
+                        <button label="Reject" onClick="@command('otorRejected', id=item.REQUEST_ID)"/>-->
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+        <button label="Add" onClick="@command('addMst', param=vm.strTitleMenu)" style="background-color: #004d40; color: white;" visible="@load(!vm.strTitleMenuMaster.contains('Otor'))"/>
+        <!--<button label="Export as Excel" onClick="@command('expReport')" style="background-color: #004d40; color: white;" visible="@load(vm.isReport)"/>-->
+    </vlayout>
+</zk>
