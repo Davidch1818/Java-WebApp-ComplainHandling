@@ -6,7 +6,6 @@ com\comphand\model\Code_604_Info.class
 com\comphand\viewmodel\CompMasterVM.class
 com\comphand\bo\MasterBo.class
 com\comphand\model\Branch.class
-com\comphand\viewmodel\ProductViewModel.class
 com\comphand\model\Code_603.class
 com\comphand\model\AllMasters.class
 com\comphand\viewmodel\CompMasterVM$2.class
@@ -17,19 +16,14 @@ com\comphand\model\Code_603_Info.class
 com\comphand\bo\ComphandBo.class
 com\comphand\viewmodel\CompHandVM$2.class
 com\comphand\model\System_Logs.class
-com\comphand\model\User.class
-com\comphand\bo\UserBo.class
 com\comphand\model\CompOtor.class
 com\comphand\viewmodel\CompMasterVM$3.class
 com\comphand\model\Code_602.class
-com\comphand\viewmodel\UserViewModel.class
 com\comphand\model\Code_604.class
 com\comphand\viewmodel\CompMasterVM$1.class
 com\comphand\viewmodel\CompHandVM$3.class
 com\comphand\model\Code_602_Info.class
 com\comphand\viewmodel\CompHandVM$1.class
-com\comphand\bo\ProductBo.class
 com\comphand\model\Channel.class
 com\comphand\model\City.class
 com\comphand\model\Code_605_Info.class
-com\comphand\model\Product.class

@@ -16,7 +16,7 @@
          call these beans directly by variable lookup; ZK's
          DelegatingVariableResolver (see zk.xml) wires them into any
          @WireVariable field whose name matches the bean id. -->
-    <bean id="userBo" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+<!--    <bean id="userBo" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="${comphandservice.base.url}/userBo" />
         <property name="serviceInterface" value="com.comphand.bo.UserBo" />
     </bean>
@@ -24,7 +24,7 @@
     <bean id="productBo" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="${comphandservice.base.url}/productBo" />
         <property name="serviceInterface" value="com.comphand.bo.ProductBo" />
-    </bean>
+    </bean>-->
     
     <bean id="masterBo" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="${comphandservice.base.url}/masterBo" />

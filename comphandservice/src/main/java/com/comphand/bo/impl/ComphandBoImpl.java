@@ -1,33 +1,14 @@
 package com.comphand.bo.impl;
 
 import com.comphand.bo.ComphandBo;
-import com.comphand.bo.MasterBo;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.comphand.bo.ProductBo;
 import com.comphand.dao.ComphandDao;
-import com.comphand.dao.MasterDao;
-import com.comphand.dao.ProductDao;
-import com.comphand.model.Branch;
-import com.comphand.model.Channel;
-import com.comphand.model.City;
-import com.comphand.model.Code_601;
-import com.comphand.model.Code_601_Info;
-import com.comphand.model.Code_602;
-import com.comphand.model.Code_602_Info;
-import com.comphand.model.Code_603;
-import com.comphand.model.Code_603_Info;
-import com.comphand.model.Code_604;
-import com.comphand.model.Code_604_Info;
-import com.comphand.model.Code_605;
-import com.comphand.model.Code_605_Info;
 import com.comphand.model.CompOtor;
 import com.comphand.model.CompReport;
 import com.comphand.model.Compdata;
-import com.comphand.model.MasterOtor;
-import com.comphand.model.Product;
 import com.comphand.model.System_Logs;
 import java.util.Date;
 

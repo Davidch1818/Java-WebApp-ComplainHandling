@@ -26,8 +26,8 @@
         <property name="dataSource" ref="dataSource" />
         <property name="mappingResources">
             <list>
-                <value>com/comphand/model/User.hbm.xml</value>
-                <value>com/comphand/model/Product.hbm.xml</value>
+<!--                <value>com/comphand/model/User.hbm.xml</value>
+                <value>com/comphand/model/Product.hbm.xml</value>-->
                 <value>com/comphand/model/Branch.hbm.xml</value>
                 <value>com/comphand/model/Channel.hbm.xml</value>
                 <value>com/comphand/model/City.hbm.xml</value>
@@ -66,12 +66,12 @@
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- Dao layer -->
-    <bean id="userDao" class="com.comphand.dao.impl.UserDaoImpl">
+<!--    <bean id="userDao" class="com.comphand.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    <bean id="productDao" class="com.comphand.dao.impl.ProductDaoImpl">
+    </bean>-->
+<!--    <bean id="productDao" class="com.comphand.dao.impl.ProductDaoImpl">
         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
+    </bean>-->
     <bean id="masterDao" class="com.comphand.dao.impl.MasterDaoImpl">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
@@ -80,12 +80,12 @@
     </bean>
 
     <!-- Bo layer -->
-    <bean id="userBo" class="com.comphand.bo.impl.UserBoImpl">
+<!--    <bean id="userBo" class="com.comphand.bo.impl.UserBoImpl">
         <property name="userDao" ref="userDao" />
     </bean>
     <bean id="productBo" class="com.comphand.bo.impl.ProductBoImpl">
         <property name="productDao" ref="productDao" />
-    </bean>
+    </bean>-->
     <bean id="masterBo" class="com.comphand.bo.impl.MasterBoImpl">
         <property name="masterDao" ref="masterDao" />
     </bean>
@@ -98,14 +98,14 @@
          default BeanNameUrlHandlerMapping; combined with web.xml's
          "/remoting/*" servlet mapping, "/userBo" becomes reachable at
          .../comphandservice/remoting/userBo -->
-    <bean id="/userBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<!--    <bean id="/userBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="userBo" />
         <property name="serviceInterface" value="com.comphand.bo.UserBo" />
     </bean>
     <bean id="/productBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="productBo" />
         <property name="serviceInterface" value="com.comphand.bo.ProductBo" />
-    </bean>
+    </bean>-->
     <bean id="/masterBo" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="masterBo" />
         <property name="serviceInterface" value="com.comphand.bo.MasterBo" />

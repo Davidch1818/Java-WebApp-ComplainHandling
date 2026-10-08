@@ -16,7 +16,6 @@ import com.comphand.model.Code_605_Info;
 import com.comphand.model.MasterOtor;
 import java.util.List;
 
-import com.comphand.model.Product;
 import org.springframework.stereotype.Service;
 
 /**

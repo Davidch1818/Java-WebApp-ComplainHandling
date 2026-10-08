@@ -16,8 +16,6 @@ import com.comphand.model.Code_605_Info;
 import com.comphand.model.MasterOtor;
 import java.util.List;
 
-import com.comphand.model.Product;
-
 public interface MasterDao {
 
     public List<Channel> lstChannels();

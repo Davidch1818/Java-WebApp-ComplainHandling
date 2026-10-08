@@ -10,8 +10,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
-import com.comphand.bo.ProductBo;
-import com.comphand.model.AllMasters;
 import com.comphand.model.Branch;
 import com.comphand.model.Channel;
 import com.comphand.model.City;
@@ -28,8 +26,6 @@ import com.comphand.model.Code_605_Info;
 import com.comphand.model.CompOtor;
 import com.comphand.model.CompReport;
 import com.comphand.model.Compdata;
-import com.comphand.model.MasterOtor;
-import com.comphand.model.Product;
 import com.comphand.model.System_Logs;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -44,7 +40,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -54,7 +49,6 @@ import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.UploadEvent;
@@ -2310,31 +2304,34 @@ public class CompHandVM {
     
     @Command
     public void clear60(@BindingParam("option") String option){
-        if(option.equals("601"))
+        if(isBtnEditMode)
         {
-            compdata.setCode_601(null);
-            compdata.setCode_601_problem(null);
+            switch (option) {
+                case "601":
+                    compdata.setCode_601(null);
+                    compdata.setCode_601_problem(null);
+                    break;
+                case "602":
+                    compdata.setCode_602(null);
+                    compdata.setCode_602_problem(null);
+                    break;
+                case "603":
+                    compdata.setCode_603(null);
+                    compdata.setCode_603_problem(null);
+                    break;
+                case "604":
+                    compdata.setCode_604(null);
+                    compdata.setCode_604_problem(null);
+                    break;
+                case "605":
+                    compdata.setCode_605(null);
+                    compdata.setCode_605_problem(null);
+                    break;
+                default:
+                    break;
+            }
         }
-        else if(option.equals("602"))
-        {
-            compdata.setCode_602(null);
-            compdata.setCode_602_problem(null);
-        }
-        else if(option.equals("603"))
-        {
-            compdata.setCode_603(null);
-            compdata.setCode_603_problem(null);
-        }
-        else if(option.equals("604"))
-        {
-            compdata.setCode_604(null);
-            compdata.setCode_604_problem(null);
-        }
-        else if(option.equals("605"))
-        {
-            compdata.setCode_605(null);
-            compdata.setCode_605_problem(null);
-        }
+
         BindUtils.postNotifyChange(null, null, this, "*");
     }
     

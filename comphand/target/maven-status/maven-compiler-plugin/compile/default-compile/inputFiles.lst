@@ -1,7 +1,5 @@
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\bo\ComphandBo.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\bo\MasterBo.java
-D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\bo\ProductBo.java
-D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\bo\UserBo.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\AllMasters.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\Branch.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\Channel.java
@@ -20,10 +18,6 @@ D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\compha
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\CompOtor.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\CompReport.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\MasterOtor.java
-D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\Product.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\System_Logs.java
-D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\model\User.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\viewmodel\CompHandVM.java
 D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\viewmodel\CompMasterVM.java
-D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\viewmodel\ProductViewModel.java
-D:\dataku\data lamar kerja\PORTFOLIO JAVA APP\comphand\comphand-workspace\comphand\src\main\java\com\comphand\viewmodel\UserViewModel.java

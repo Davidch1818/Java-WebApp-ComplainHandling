@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.comphand.bo.ProductBo;
 import com.comphand.dao.MasterDao;
-import com.comphand.dao.ProductDao;
 import com.comphand.model.Branch;
 import com.comphand.model.Channel;
 import com.comphand.model.City;
@@ -22,7 +20,6 @@ import com.comphand.model.Code_604_Info;
 import com.comphand.model.Code_605;
 import com.comphand.model.Code_605_Info;
 import com.comphand.model.MasterOtor;
-import com.comphand.model.Product;
 
 public class MasterBoImpl implements MasterBo {
 

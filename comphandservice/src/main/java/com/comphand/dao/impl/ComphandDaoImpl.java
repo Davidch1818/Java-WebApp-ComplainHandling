@@ -1,31 +1,13 @@
 package com.comphand.dao.impl;
 
 import com.comphand.dao.ComphandDao;
-import com.comphand.dao.MasterDao;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import com.comphand.dao.ProductDao;
-import com.comphand.model.Branch;
-import com.comphand.model.Channel;
-import com.comphand.model.City;
-import com.comphand.model.Code_601;
-import com.comphand.model.Code_601_Info;
-import com.comphand.model.Code_602;
-import com.comphand.model.Code_602_Info;
-import com.comphand.model.Code_603;
-import com.comphand.model.Code_603_Info;
-import com.comphand.model.Code_604;
-import com.comphand.model.Code_604_Info;
-import com.comphand.model.Code_605;
-import com.comphand.model.Code_605_Info;
 import com.comphand.model.CompOtor;
 import com.comphand.model.CompReport;
 import com.comphand.model.Compdata;
-import com.comphand.model.MasterOtor;
-import com.comphand.model.Product;
 import com.comphand.model.System_Logs;
 import java.util.ArrayList;
 import java.util.Date;
@@ -1204,7 +1186,8 @@ public class ComphandDaoImpl implements ComphandDao {
                 "    USER_OTOR \n" +
                 "FROM SYSTEM_LOGS \n" +
                 "WHERE CAST(TGL_INPUT AS DATE) BETWEEN CAST(:sDate AS DATE) AND CAST(:eDate AS DATE)\n" +
-                "  AND (\n" +
+                "  OR (\n" +
+//                "  AND (\n" +
                 "      USER_INPUT ILIKE :KEY OR \n" +
                 "      ACTIVITY_TYPE ILIKE :KEY OR \n" +
                 "      CAST(REQUEST_ID AS TEXT) ILIKE :KEY OR \n" +
@@ -1220,6 +1203,7 @@ public class ComphandDaoImpl implements ComphandDao {
 //                    + "OR DESCRIPTION=:KEY OR CHANGED_FIELDS=:KEY OR DESC_FILE=:KEY OR USER_OTOR=:KEY ) " +
 //            "ORDER BY TGL_INPUT DESC ").addEntity(System_Logs.class).setParameter("sDate", sDate,StandardBasicTypes.TIMESTAMP).setParameter("eDate", eDate,StandardBasicTypes.TIMESTAMP)
                     .setParameter("KEY", keyString).list();
+            System.out.println("SIZENYAAAAAA "+result.size());
             
         } catch (Exception e) {
             e.printStackTrace(); // or log to file

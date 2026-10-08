@@ -9,7 +9,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
-import com.comphand.bo.ProductBo;
 import com.comphand.model.AllMasters;
 import com.comphand.model.Branch;
 import com.comphand.model.Channel;
@@ -25,11 +24,8 @@ import com.comphand.model.Code_604_Info;
 import com.comphand.model.Code_605;
 import com.comphand.model.Code_605_Info;
 import com.comphand.model.MasterOtor;
-import com.comphand.model.Product;
 import java.util.ArrayList;
-import java.util.Date;
 import org.zkoss.bind.BindUtils;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
@@ -162,7 +158,7 @@ public class CompMasterVM {
     @Init
     public void init()
     {
-        strUserName="TEST";
+        strUserName="TEST2";
     }
 
     @Command

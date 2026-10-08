@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.comphand.dao.ProductDao;
 import com.comphand.model.Branch;
 import com.comphand.model.Channel;
 import com.comphand.model.City;
@@ -21,13 +20,10 @@ import com.comphand.model.Code_604_Info;
 import com.comphand.model.Code_605;
 import com.comphand.model.Code_605_Info;
 import com.comphand.model.MasterOtor;
-import com.comphand.model.Product;
 import com.comphand.model.System_Logs;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.hibernate.Hibernate;
-import org.hibernate.Transaction;
 
 public class MasterDaoImpl implements MasterDao {
 

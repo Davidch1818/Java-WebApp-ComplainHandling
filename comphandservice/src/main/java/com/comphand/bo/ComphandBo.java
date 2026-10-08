@@ -1,25 +1,10 @@
 package com.comphand.bo;
 
-import com.comphand.model.Branch;
-import com.comphand.model.Channel;
-import com.comphand.model.City;
-import com.comphand.model.Code_601;
-import com.comphand.model.Code_601_Info;
-import com.comphand.model.Code_602;
-import com.comphand.model.Code_602_Info;
-import com.comphand.model.Code_603;
-import com.comphand.model.Code_603_Info;
-import com.comphand.model.Code_604;
-import com.comphand.model.Code_604_Info;
-import com.comphand.model.Code_605;
-import com.comphand.model.Code_605_Info;
 import com.comphand.model.CompOtor;
 import com.comphand.model.CompReport;
 import com.comphand.model.Compdata;
-import com.comphand.model.MasterOtor;
 import java.util.List;
 
-import com.comphand.model.Product;
 import com.comphand.model.System_Logs;
 import java.util.Date;
 import org.springframework.stereotype.Service;
